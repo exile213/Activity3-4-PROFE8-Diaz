@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'views/welcome_page.dart';
 import 'views/login_page.dart';
 import 'views/register_page.dart';
+import 'views/service_options_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,17 +80,105 @@ class ServicesTab extends StatelessWidget {
         backgroundColor: Colors.blue[700],
         foregroundColor: Colors.white,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Icon(Icons.flight, size: 80, color: Colors.blue[300]),
             const SizedBox(height: 20),
+            const Icon(Icons.flight, size: 100, color: Colors.blue),
+            const SizedBox(height: 40),
             const Text(
-              'Services pages coming soon',
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              'Drone Services',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Choose your service option',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const SizedBox(height: 40),
+            _buildServiceButton(
+              context,
+              'Service Options',
+              'Customize drone model, pilot assistance, and insurance',
+              Icons.settings,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ServiceOptionsPage(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            _buildServiceButton(
+              context,
+              'Book Reservation',
+              'Schedule your drone service with date and time',
+              Icons.calendar_today,
+              () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Reservation page coming soon')),
+                );
+              },
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildServiceButton(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
+    return Card(
+      elevation: 2,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, size: 32, color: Colors.blue[700]),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.grey[400]),
+            ],
+          ),
         ),
       ),
     );
