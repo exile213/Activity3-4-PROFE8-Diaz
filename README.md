@@ -11,7 +11,7 @@ This app showcases various Flutter form widgets and validation techniques throug
 ```
 lib/
  ┣ main.dart                          # App entry point with BottomNavigationBar
- ┣ pages/
+ ┣ views/
  ┃ ┣ welcome_page.dart                # Home page with username form
  ┃ ┣ login_page.dart                  # Login with validation
  ┃ ┣ register_page.dart               # Registration with role dropdown
@@ -29,140 +29,47 @@ lib/
    ┗ custom_button.dart               # Reusable styled button
 ```
 
-## Features & Implementation
+## Tasks & Implementation
 
-### Task 1: Simple Form with TextFormField
+### Task 1: Create a simple form with a TextFormField for entering a username.
 
-**Requirement:** Create a simple form with a TextFormField for entering a username.
+**Implementation:** `WelcomePage` with username input field and submit button.
 
-**Implementation:**
+### Task 2: Build a login form with two fields (email and password) and a submit button.
 
-- Created `WelcomePage` with a username input field
-- Used `CustomFormField` widget (reusable TextFormField)
-- Added submit button that displays the entered username
-- Shows confirmation message using SnackBar
+**Implementation:** `LoginPage` with email and password fields using `CustomFormField` widgets.
 
----
+### Task 3: Add form validation to check if the email field contains "@" and password is not empty.
 
-### Task 2: Login Form
+**Implementation:** Added validation methods in `LoginPage` - email must contain "@" and password cannot be empty.
 
-**Requirement:** Build a login form with two fields (email and password) and a submit button.
+### Task 4: Use a GlobalKey<FormState> to manage form validation and submission.
 
-**Implementation:**
+**Implementation:** Implemented `GlobalKey<FormState>` in `LoginPage` to manage form validation.
 
-- Created `LoginPage` with email and password fields
-- Used `CustomFormField` widget for both inputs
-- Password field has `obscureText: true` for security
-- Email field uses `TextInputType.emailAddress` keyboard type
+### Task 5: Create a form with different input types: TextField, Checkbox, and Switch.
 
----
+**Implementation:** `ServiceOptionsPage` with TextField (drone model), Checkbox (pilot assistance), and Switch (insurance).
 
-### Task 3: Form Validation
+### Task 6: Build a registration form with name, email, password, and confirm password fields.
 
-**Requirement:** Add form validation to check if the email field contains "@" and password is not empty.
+**Implementation:** `RegisterPage` with name, email, password, and confirm password fields with validation.
 
-**Implementation:**
+### Task 7: Implement a dropdown menu inside a form to select a user's role (e.g., Admin, User).
 
-- Implemented `_validateEmail()` method that checks for "@" symbol
-- Implemented `_validatePassword()` method that checks for non-empty input
-- Validation errors display below respective fields
-- Form submission blocked until validation passes
+**Implementation:** Added `CustomDropdown` in `RegisterPage` with roles: Client, Drone Pilot, Admin.
 
----
+### Task 8: Add a date picker and time picker input to a form.
 
-### Task 4: GlobalKey for Form Management
+**Implementation:** `ReservationPage` with `CustomDatePicker` and `CustomTimePicker` for booking schedules.
 
-**Requirement:** Use a GlobalKey<FormState> to manage form validation and submission.
+### Task 9: Use a controller to capture and display text from a TextField after pressing a button.
 
-**Implementation:**
+**Implementation:** `NotesPage` using `TextEditingController` to capture and display flight notes.
 
-- Created `_formKey = GlobalKey<FormState>()` in LoginPage
-- Wrapped form fields in `Form` widget with the key
-- Used `_formKey.currentState!.validate()` on submit
-- Only processes login when validation returns true
+### Task 10: Create a form that saves data into a local list and displays the submitted inputs below the form.
 
----
-
-### Task 5: Mixed Input Types
-
-**Requirement:** Create a form with different input types: TextField, Checkbox, and Switch.
-
-**Implementation:**
-
-- Created `ServiceOptionsPage` with three input types:
-  - TextField for drone model preference
-  - Checkbox for "Need Pilot Assistance?"
-  - Switch for "Include Insurance?"
-- Used custom reusable widgets for each input type
-- State management tracks all input values
-
----
-
-### Task 6: Registration Form
-
-**Requirement:** Build a registration form with name, email, password, and confirm password fields.
-
-**Implementation:**
-
-- Created `RegisterPage` with four text fields
-- Validates all fields are filled
-- Validates email contains "@"
-- Validates password and confirm password match
-- Uses `GlobalKey<FormState>` for form validation
-
----
-
-### Task 7: Dropdown Menu
-
-**Requirement:** Implement a dropdown menu inside a form to select a user's role (e.g., Admin, User).
-
-**Implementation:**
-
-- Added `CustomDropdown` widget in RegisterPage
-- Three role options: "Client", "Drone Pilot", "Admin"
-- Dropdown integrated with form validation
-- Selected role stored in state
-
----
-
-### Task 8: Date and Time Pickers
-
-**Requirement:** Add a date picker and time picker input to a form.
-
-**Implementation:**
-
-- Created `ReservationPage` for booking drone schedules
-- Implemented `CustomDatePicker` using `showDatePicker()`
-- Implemented `CustomTimePicker` using `showTimePicker()`
-- Date formatted using `intl` package
-- Selected date and time displayed in form fields
-
----
-
-### Task 9: TextEditingController Usage
-
-**Requirement:** Use a controller to capture and display text from a TextField after pressing a button.
-
-**Implementation:**
-
-- Created `NotesPage` for flight instructions/notes
-- Used `TextEditingController` to manage text input
-- Button captures controller text and displays it below
-- Demonstrates direct text manipulation with controllers
-
----
-
-### Task 10: Local Data Persistence
-
-**Requirement:** Create a form that saves data into a local list and displays the submitted inputs below the form.
-
-**Implementation:**
-
-- Created `BookingHistoryPage` with booking form
-- Form captures service type and location
-- Data saved to local `List<Map<String, String>>`
-- Uses `ListView.builder` to display all bookings
-- Each booking shown in a card below the form
+**Implementation:** `BookingHistoryPage` with form that saves bookings to a local list and displays them using `ListView.builder`.
 
 ---
 
