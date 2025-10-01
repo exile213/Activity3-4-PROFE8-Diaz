@@ -5,6 +5,7 @@ import 'views/register_page.dart';
 import 'views/service_options_page.dart';
 import 'views/reservation_page.dart';
 import 'views/notes_page.dart';
+import 'views/booking_history_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,11 +38,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  // Pages for each tab - placeholders for pages not yet created
+  // Pages for each tab
   final List<Widget> _pages = [
     const WelcomePage(), // Home
-    const ServicesTab(), // Services (placeholder for now)
-    const BookingsTab(), // Bookings (placeholder)
+    const ServicesTab(), // Services
+    const BookingHistoryPage(), // Bookings
     const ProfileTab(), // Profile
   ];
 
@@ -191,33 +192,6 @@ class ServicesTab extends StatelessWidget {
 }
 
 // Placeholder for Bookings Tab
-class BookingsTab extends StatelessWidget {
-  const BookingsTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bookings'),
-        backgroundColor: Colors.blue[700],
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.history, size: 80, color: Colors.blue[300]),
-            const SizedBox(height: 20),
-            const Text(
-              'Booking History page coming soon',
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 // Profile Tab with navigation to Login, Register, Notes
 class ProfileTab extends StatelessWidget {

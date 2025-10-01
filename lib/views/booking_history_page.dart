@@ -1,0 +1,126 @@
+import 'package:flutter/material.dart';
+import '../widgets/custom_form_field.dart';
+import '../widgets/custom_button.dart';
+
+class BookingHistoryPage extends StatefulWidget {
+  const BookingHistoryPage({Key? key}) : super(key: key);
+
+  @override
+  State<BookingHistoryPage> createState() => _BookingHistoryPageState();
+}
+
+class _BookingHistoryPageState extends State<BookingHistoryPage> {
+  final TextEditingController _serviceTypeController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+  final List<Map<String, String>> _bookings = [];
+
+  @override
+  void dispose() {
+    _serviceTypeController.dispose();
+    _locationController.dispose();
+    super.dispose();
+  }
+
+  void _addBooking() {
+    if (_serviceTypeController.text.isEmpty ||
+        _locationController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _bookings.add({
+        'serviceType': _serviceTypeController.text,
+        'location': _locationController.text,
+      });
+    });
+
+    _serviceTypeController.clear();
+    _locationController.clear();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Booking added successfully!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Booking History'),
+        backgroundColor: Colors.blue[700],
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Add New Booking',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            CustomFormField(
+              label: 'Service Type',
+              hint: 'e.g., Aerial Survey, Photography',
+              controller: _serviceTypeController,
+            ),
+            const SizedBox(height: 16),
+            CustomFormField(
+              label: 'Location',
+              hint: 'e.g., Manila, Cebu',
+              controller: _locationController,
+            ),
+            const SizedBox(height: 20),
+            CustomButton(text: 'Add Booking', onPressed: _addBooking),
+            const SizedBox(height: 30),
+            const Text(
+              'All Bookings',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: _bookings.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'No bookings yet',
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _bookings.length,
+                      itemBuilder: (context, index) {
+                        final booking = _bookings[index];
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.blue[700],
+                              child: Text(
+                                '${index + 1}',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            title: Text(booking['serviceType']!),
+                            subtitle: Text(booking['location']!),
+                            trailing: const Icon(Icons.flight),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

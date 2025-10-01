@@ -33,63 +33,43 @@ lib/
 
 ### Task 1: Create a simple form with a TextFormField for entering a username.
 
-**Implementation:** `WelcomePage` with username input field and submit button.
+**Implemented in:** `lib/views/welcome_page.dart`
 
 ### Task 2: Build a login form with two fields (email and password) and a submit button.
 
-**Implementation:** `LoginPage` with email and password fields using `CustomFormField` widgets.
+**Implemented in:** `lib/views/login_page.dart`
 
 ### Task 3: Add form validation to check if the email field contains "@" and password is not empty.
 
-**Implementation:** Added validation methods in `LoginPage` - email must contain "@" and password cannot be empty.
+**Implemented in:** `lib/views/login_page.dart`
 
 ### Task 4: Use a GlobalKey<FormState> to manage form validation and submission.
 
-**Implementation:** Implemented `GlobalKey<FormState>` in `LoginPage` to manage form validation.
+**Implemented in:** `lib/views/login_page.dart`
 
 ### Task 5: Create a form with different input types: TextField, Checkbox, and Switch.
 
-**Implementation:** `ServiceOptionsPage` with TextField (drone model), Checkbox (pilot assistance), and Switch (insurance).
+**Implemented in:** `lib/views/service_options_page.dart`
 
 ### Task 6: Build a registration form with name, email, password, and confirm password fields.
 
-**Implementation:** `RegisterPage` with name, email, password, and confirm password fields with validation.
+**Implemented in:** `lib/views/register_page.dart`
 
 ### Task 7: Implement a dropdown menu inside a form to select a user's role (e.g., Admin, User).
 
-**Implementation:** Added `CustomDropdown` in `RegisterPage` with roles: Client, Drone Pilot, Admin.
+**Implemented in:** `lib/views/register_page.dart`
 
 ### Task 8: Add a date picker and time picker input to a form.
 
-**Implementation:** `ReservationPage` with `CustomDatePicker` and `CustomTimePicker` for booking schedules.
+**Implemented in:** `lib/views/reservation_page.dart`
 
 ### Task 9: Use a controller to capture and display text from a TextField after pressing a button.
 
-**Implementation:** `NotesPage` using `TextEditingController` to capture and display flight notes.
+**Implemented in:** `lib/views/notes_page.dart`
 
 ### Task 10: Create a form that saves data into a local list and displays the submitted inputs below the form.
 
-**Implementation:** `BookingHistoryPage` with form that saves bookings to a local list and displays them using `ListView.builder`.
-
----
-
-## Dependencies
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.8
-  intl: ^0.19.0 # For date formatting
-```
-
-## Getting Started
-
-1. Clone the repository
-2. Run `flutter pub get` to install dependencies
-3. Run `flutter run` to start the app
-
-## Navigation
+**Implemented in:** `lib/views/booking_history_page.dart`
 
 The app uses a `BottomNavigationBar` with 4 tabs:
 
