@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+import '../widgets/custom_date_picker.dart';
+import '../widgets/custom_time_picker.dart';
+import '../widgets/custom_button.dart';
+
+class ReservationPage extends StatefulWidget {
+  const ReservationPage({Key? key}) : super(key: key);
+
+  @override
+  State<ReservationPage> createState() => _ReservationPageState();
+}
+
+class _ReservationPageState extends State<ReservationPage> {
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
+
+  void _handleSubmit() {
+    if (_selectedDate == null || _selectedTime == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select both date and time'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Reservation submitted successfully!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Book Reservation'),
+        backgroundColor: Colors.blue[700],
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Schedule Drone Service',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 40),
+            CustomDatePicker(
+              label: 'Select Date',
+              selectedDate: _selectedDate,
+              onDateSelected: (date) {
+                setState(() {
+                  _selectedDate = date;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            CustomTimePicker(
+              label: 'Select Time',
+              selectedTime: _selectedTime,
+              onTimeSelected: (time) {
+                setState(() {
+                  _selectedTime = time;
+                });
+              },
+            ),
+            const SizedBox(height: 40),
+            CustomButton(text: 'Submit Reservation', onPressed: _handleSubmit),
+          ],
+        ),
+      ),
+    );
+  }
+}

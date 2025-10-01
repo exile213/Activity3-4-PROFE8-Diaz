@@ -3,6 +3,8 @@ import 'views/welcome_page.dart';
 import 'views/login_page.dart';
 import 'views/register_page.dart';
 import 'views/service_options_page.dart';
+import 'views/reservation_page.dart';
+import 'views/notes_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -121,8 +123,11 @@ class ServicesTab extends StatelessWidget {
               'Schedule your drone service with date and time',
               Icons.calendar_today,
               () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Reservation page coming soon')),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ReservationPage(),
+                  ),
                 );
               },
             ),
@@ -249,9 +254,9 @@ class ProfileTab extends StatelessWidget {
             }),
             const SizedBox(height: 16),
             _buildProfileButton(context, 'Flight Notes', Icons.notes, () {
-              // Will navigate to NotesPage once created
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Notes page coming soon')),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotesPage()),
               );
             }),
           ],
