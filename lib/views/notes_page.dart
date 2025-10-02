@@ -28,8 +28,17 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flight Notes'),
-        backgroundColor: Colors.blue[700],
+        title: const Text('Drone Operations Notes'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -38,7 +47,7 @@ class _NotesPageState extends State<NotesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Flight Instructions',
+              'Mission Instructions',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
@@ -46,7 +55,7 @@ class _NotesPageState extends State<NotesPage> {
               controller: _notesController,
               maxLines: 5,
               decoration: InputDecoration(
-                hintText: 'Enter flight notes or instructions...',
+                hintText: 'Enter drone mission notes or instructions...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

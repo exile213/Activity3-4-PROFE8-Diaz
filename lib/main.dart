@@ -50,22 +50,39 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue[700],
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.flight), label: 'Services'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Bookings'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.transparent,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white70,
+          elevation: 0,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.flight),
+              label: 'Services',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Bookings',
+            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          ],
+        ),
       ),
     );
   }
@@ -80,7 +97,16 @@ class ServicesTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Services'),
-        backgroundColor: Colors.blue[700],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -202,7 +228,16 @@ class ProfileTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor: Colors.blue[700],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -212,7 +247,28 @@ class ProfileTab extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             const Icon(Icons.account_circle, size: 100, color: Colors.blue),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
+            const Text(
+              'Account Management',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Manage your profile and account settings',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              'Authentication',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 12),
             _buildProfileButton(context, 'Login', Icons.login, () {
               Navigator.push(
                 context,
@@ -226,8 +282,17 @@ class ProfileTab extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const RegisterPage()),
               );
             }),
-            const SizedBox(height: 16),
-            _buildProfileButton(context, 'Flight Notes', Icons.notes, () {
+            const SizedBox(height: 24),
+            const Text(
+              'Drone Operations',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 12),
+            _buildProfileButton(context, 'Mission Notes', Icons.notes, () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const NotesPage()),

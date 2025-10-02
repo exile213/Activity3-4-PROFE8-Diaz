@@ -58,7 +58,16 @@ Insurance: ${_includeInsurance ? 'Included' : 'Not included'}
     return Scaffold(
       appBar: AppBar(
         title: const Text('Service Options'),
-        backgroundColor: Colors.blue[700],
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
