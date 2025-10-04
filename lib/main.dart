@@ -10,6 +10,7 @@ import 'views/about_page.dart';
 import 'views/contact_page.dart';
 import 'views/push_demo_page.dart';
 import 'views/messages_page.dart';
+import 'views/login_entry_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,11 +28,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      // Named routes configuration
+      // Named routes configuration - Task 10: Complete navigation flow
       initialRoute: '/',
       routes: {
-        '/': (context) => const MainScreen(),
-        '/home': (context) => const MainScreen(),
+        '/': (context) => const LoginEntryPage(), // Start with login screen
+        '/home': (context) => const MainScreen(), // Main dashboard after login
         '/about': (context) => const AboutPage(),
         '/contact': (context) => const ContactPage(),
       },
