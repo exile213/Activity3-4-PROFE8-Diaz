@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_date_picker.dart';
 import '../widgets/custom_time_picker.dart';
 import '../widgets/custom_button.dart';
+import 'booking_history_page.dart';
 
 class ReservationPage extends StatefulWidget {
   const ReservationPage({Key? key}) : super(key: key);
@@ -27,8 +28,11 @@ class _ReservationPageState extends State<ReservationPage> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Reservation submitted successfully!'),
+        content: Text(
+          'Date and time confirmed! Go to Bookings to complete your survey booking.',
+        ),
         backgroundColor: Colors.green,
+        duration: Duration(seconds: 3),
       ),
     );
   }
@@ -80,7 +84,7 @@ class _ReservationPageState extends State<ReservationPage> {
               },
             ),
             const SizedBox(height: 40),
-            CustomButton(text: 'Submit Reservation', onPressed: _handleSubmit),
+            CustomButton(text: 'Confirm Date & Time', onPressed: _handleSubmit),
           ],
         ),
       ),

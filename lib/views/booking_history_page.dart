@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_form_field.dart';
+import '../widgets/custom_date_picker.dart';
+import '../widgets/custom_time_picker.dart';
 import '../widgets/custom_button.dart';
 
 class BookingHistoryPage extends StatefulWidget {
@@ -13,6 +15,8 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
   final TextEditingController _serviceTypeController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final List<Map<String, String>> _bookings = [];
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
 
   @override
   void dispose() {
@@ -23,10 +27,12 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
 
   void _addBooking() {
     if (_serviceTypeController.text.isEmpty ||
-        _locationController.text.isEmpty) {
+        _locationController.text.isEmpty ||
+        _selectedDate == null ||
+        _selectedTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please fill in all fields'),
+          content: Text('Please fill in all fields and select date/time'),
           backgroundColor: Colors.red,
         ),
       );
@@ -37,12 +43,19 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
       _bookings.add({
         'serviceType': _serviceTypeController.text,
         'location': _locationController.text,
+        'date':
+            '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+        'time': _selectedTime!.format(context),
         'timestamp': DateTime.now().toString(),
       });
     });
 
     _serviceTypeController.clear();
     _locationController.clear();
+    setState(() {
+      _selectedDate = null;
+      _selectedTime = null;
+    });
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -91,6 +104,26 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
               hint: 'e.g., Manila, Cebu, Project Site Address',
               controller: _locationController,
             ),
+            const SizedBox(height: 16),
+            CustomDatePicker(
+              label: 'Select Date',
+              selectedDate: _selectedDate,
+              onDateSelected: (date) {
+                setState(() {
+                  _selectedDate = date;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            CustomTimePicker(
+              label: 'Select Time',
+              selectedTime: _selectedTime,
+              onTimeSelected: (time) {
+                setState(() {
+                  _selectedTime = time;
+                });
+              },
+            ),
             const SizedBox(height: 20),
             CustomButton(text: 'Add Survey Booking', onPressed: _addBooking),
             const SizedBox(height: 30),
@@ -122,7 +155,17 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                               ),
                             ),
                             title: Text(booking['serviceType']!),
-                            subtitle: Text('📍 ${booking['location']!}'),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('📍 ${booking['location']!}'),
+                                if (booking['date'] != null &&
+                                    booking['time'] != null)
+                                  Text(
+                                    '📅 ${booking['date']} at ${booking['time']}',
+                                  ),
+                              ],
+                            ),
                             trailing: const Icon(Icons.flight),
                           ),
                         );

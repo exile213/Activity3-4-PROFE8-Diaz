@@ -153,7 +153,7 @@ class ServicesTab extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ReservationPage(),
+                    builder: (context) => const BookingHistoryPage(),
                   ),
                 );
               },
