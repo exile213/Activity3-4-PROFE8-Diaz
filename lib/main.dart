@@ -38,11 +38,16 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  // Pages for each tab
-  final List<Widget> _pages = [
-    const WelcomePage(), // Home
-    const ServicesTab(), // Services
-    const BookingHistoryPage(), // Bookings
+  // Pages for each tab - Three tabs: Home, Booking, Profile
+  List<Widget> get _pages => [
+    WelcomePage(
+      onNavigateToTab: (index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+    ), // Home
+    const BookingHistoryPage(), // Booking
     const ProfileTab(), // Profile
   ];
 
@@ -88,12 +93,8 @@ class _MainScreenState extends State<MainScreen> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.flight),
-              label: 'Surveying',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'Bookings',
+              icon: Icon(Icons.book_online),
+              label: 'Booking',
             ),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ],
@@ -141,38 +142,26 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person_outline, color: Color(0xFF77A1D3)),
+            leading: const Icon(Icons.book_online, color: Color(0xFF77A1D3)),
+            title: const Text('Booking'),
+            subtitle: const Text('View and manage drone survey bookings'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              // Navigate to Booking tab
+              setState(() {
+                _currentIndex = 1; // Booking tab index
+              });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline, color: Color(0xFF79CBCA)),
             title: const Text('Profile'),
             subtitle: const Text('Login, Register, and Notes'),
             onTap: () {
               Navigator.pop(context); // Close drawer
               // Navigate to Profile tab
               setState(() {
-                _currentIndex = 3; // Profile tab index
-              });
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.settings, color: Color(0xFF79CBCA)),
-            title: const Text('Surveying Services'),
-            subtitle: const Text('Book drone surveys and services'),
-            onTap: () {
-              Navigator.pop(context); // Close drawer
-              // Navigate to Services tab
-              setState(() {
-                _currentIndex = 1; // Services tab index
-              });
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.history, color: Color(0xFFE684AE)),
-            title: const Text('Booking History'),
-            subtitle: const Text('View your past and upcoming bookings'),
-            onTap: () {
-              Navigator.pop(context); // Close drawer
-              // Navigate to Bookings tab
-              setState(() {
-                _currentIndex = 2; // Bookings tab index
+                _currentIndex = 2; // Profile tab index
               });
             },
           ),
@@ -395,6 +384,151 @@ class ProfileTab extends StatelessWidget {
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    );
+  }
+}
+
+// Combined Services Tab for Task 3 - Three tabs only
+class CombinedServicesTab extends StatelessWidget {
+  const CombinedServicesTab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          const Icon(Icons.business, size: 80, color: Colors.blue),
+          const SizedBox(height: 20),
+          const Text(
+            'Drone Services',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'Surveying & Booking Management',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+          const SizedBox(height: 30),
+
+          // Surveying Section
+          const Text(
+            'Surveying Options',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          _buildServiceButton(
+            context,
+            'Service Customization',
+            'Customize drone model, pilot assistance, and insurance',
+            Icons.settings,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ServiceOptionsPage(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          _buildServiceButton(
+            context,
+            'Schedule Survey',
+            'Select date and time for your drone survey',
+            Icons.calendar_today,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ReservationPage(),
+                ),
+              );
+            },
+          ),
+
+          const SizedBox(height: 30),
+          const Divider(),
+          const SizedBox(height: 20),
+
+          // Booking Management Section
+          const Text(
+            'Booking Management',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          _buildServiceButton(
+            context,
+            'View Booking History',
+            'See all your past and upcoming drone surveys',
+            Icons.history,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookingHistoryPage(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildServiceButton(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
+    return Card(
+      elevation: 2,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, color: Colors.blue[700], size: 24),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+            ],
+          ),
+        ),
       ),
     );
   }

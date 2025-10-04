@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_form_field.dart';
 import '../widgets/custom_button.dart';
+import 'service_options_page.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  final Function(int)? onNavigateToTab;
+  const WelcomePage({Key? key, this.onNavigateToTab}) : super(key: key);
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
@@ -65,6 +67,40 @@ class _WelcomePageState extends State<WelcomePage> {
             onPressed: _handleSubmit,
             icon: Icons.send,
           ),
+          const SizedBox(height: 30),
+          const Divider(),
+          const SizedBox(height: 20),
+          const Text(
+            'Drone Surveying Services',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          _buildServiceButton(
+            'Service Options',
+            'Customize drone model, pilot assistance, and insurance',
+            Icons.settings,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ServiceOptionsPage(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          _buildServiceButton(
+            'Book Surveying Service',
+            'View and manage your drone survey bookings',
+            Icons.book_online,
+            () {
+              // Navigate to Booking tab using callback
+              if (widget.onNavigateToTab != null) {
+                widget.onNavigateToTab!(1); // Booking tab index
+              }
+            },
+          ),
           if (_submittedUsername.isNotEmpty) ...[
             const SizedBox(height: 30),
             Container(
@@ -91,6 +127,57 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildServiceButton(
+    String title,
+    String subtitle,
+    IconData icon,
+    VoidCallback onPressed,
+  ) {
+    return Card(
+      elevation: 2,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.blue[100],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, color: Colors.blue[700], size: 24),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+            ],
+          ),
+        ),
       ),
     );
   }
