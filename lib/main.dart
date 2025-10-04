@@ -6,6 +6,8 @@ import 'views/service_options_page.dart';
 import 'views/reservation_page.dart';
 import 'views/notes_page.dart';
 import 'views/booking_history_page.dart';
+import 'views/about_page.dart';
+import 'views/contact_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      // Named routes configuration
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MainScreen(),
+        '/home': (context) => const MainScreen(),
+        '/about': (context) => const AboutPage(),
+        '/contact': (context) => const ContactPage(),
+      },
     );
   }
 }
@@ -54,20 +63,26 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Emil\'s Drone Surveying'),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+      appBar: _currentIndex == 1
+          ? null
+          : AppBar(
+              title: const Text('Emil\'s Drone Surveying'),
+              centerTitle: true,
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF77A1D3),
+                      Color(0xFF79CBCA),
+                      Color(0xFFE684AE),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+              ),
+              foregroundColor: Colors.white,
             ),
-          ),
-        ),
-        foregroundColor: Colors.white,
-      ),
       drawer: _buildDrawer(context),
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
@@ -163,6 +178,35 @@ class _MainScreenState extends State<MainScreen> {
               setState(() {
                 _currentIndex = 2; // Profile tab index
               });
+            },
+          ),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Named Routes Demo',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFE684AE),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline, color: Color(0xFF77A1D3)),
+            title: const Text('About'),
+            subtitle: const Text('Company information (Named Route)'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.pushNamed(context, '/about');
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.contact_phone, color: Color(0xFF79CBCA)),
+            title: const Text('Contact'),
+            subtitle: const Text('Contact information (Named Route)'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.pushNamed(context, '/contact');
             },
           ),
           const Divider(),

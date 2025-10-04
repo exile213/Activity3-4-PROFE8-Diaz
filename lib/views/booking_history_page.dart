@@ -11,17 +11,26 @@ class BookingHistoryPage extends StatefulWidget {
   State<BookingHistoryPage> createState() => _BookingHistoryPageState();
 }
 
-class _BookingHistoryPageState extends State<BookingHistoryPage> {
+class _BookingHistoryPageState extends State<BookingHistoryPage>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _serviceTypeController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final List<Map<String, String>> _bookings = [];
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   void dispose() {
     _serviceTypeController.dispose();
     _locationController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -67,6 +76,39 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Drone Survey Bookings'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+        foregroundColor: Colors.white,
+        bottom: TabBar(
+          controller: _tabController,
+          indicatorColor: Colors.white,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          tabs: const [
+            Tab(icon: Icon(Icons.add), text: 'New Booking'),
+            Tab(icon: Icon(Icons.history), text: 'History'),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [_buildNewBookingTab(), _buildHistoryTab()],
+      ),
+    );
+  }
+
+  Widget _buildNewBookingTab() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -111,18 +153,40 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
           ),
           const SizedBox(height: 20),
           CustomButton(text: 'Add Survey Booking', onPressed: _addBooking),
-          const SizedBox(height: 30),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHistoryTab() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           const Text(
             'All Survey Bookings',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           Expanded(
             child: _bookings.isEmpty
                 ? const Center(
-                    child: Text(
-                      'No survey bookings yet',
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.history, size: 80, color: Colors.grey),
+                        SizedBox(height: 16),
+                        Text(
+                          'No survey bookings yet',
+                          style: TextStyle(color: Colors.grey, fontSize: 18),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Add a booking from the New Booking tab',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
+                      ],
                     ),
                   )
                 : ListView.builder(
