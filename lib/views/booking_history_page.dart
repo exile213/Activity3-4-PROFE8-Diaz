@@ -67,113 +67,97 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Drone Surveying Bookings'),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Add New Survey Booking',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-        ),
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Add New Survey Booking',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            CustomFormField(
-              label: 'Survey Type',
-              hint:
-                  'e.g., Aerial Survey, Land Mapping, Infrastructure Inspection',
-              controller: _serviceTypeController,
-            ),
-            const SizedBox(height: 16),
-            CustomFormField(
-              label: 'Location',
-              hint: 'e.g., Manila, Cebu, Project Site Address',
-              controller: _locationController,
-            ),
-            const SizedBox(height: 16),
-            CustomDatePicker(
-              label: 'Select Date',
-              selectedDate: _selectedDate,
-              onDateSelected: (date) {
-                setState(() {
-                  _selectedDate = date;
-                });
-              },
-            ),
-            const SizedBox(height: 16),
-            CustomTimePicker(
-              label: 'Select Time',
-              selectedTime: _selectedTime,
-              onTimeSelected: (time) {
-                setState(() {
-                  _selectedTime = time;
-                });
-              },
-            ),
-            const SizedBox(height: 20),
-            CustomButton(text: 'Add Survey Booking', onPressed: _addBooking),
-            const SizedBox(height: 30),
-            const Text(
-              'All Survey Bookings',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: _bookings.isEmpty
-                  ? const Center(
-                      child: Text(
-                        'No survey bookings yet',
-                        style: TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: _bookings.length,
-                      itemBuilder: (context, index) {
-                        final booking = _bookings[index];
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.blue[700],
-                              child: Text(
-                                '${index + 1}',
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            title: Text(booking['serviceType']!),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('📍 ${booking['location']!}'),
-                                if (booking['date'] != null &&
-                                    booking['time'] != null)
-                                  Text(
-                                    '📅 ${booking['date']} at ${booking['time']}',
-                                  ),
-                              ],
-                            ),
-                            trailing: const Icon(Icons.flight),
-                          ),
-                        );
-                      },
+          const SizedBox(height: 20),
+          CustomFormField(
+            label: 'Survey Type',
+            hint:
+                'e.g., Aerial Survey, Land Mapping, Infrastructure Inspection',
+            controller: _serviceTypeController,
+          ),
+          const SizedBox(height: 16),
+          CustomFormField(
+            label: 'Location',
+            hint: 'e.g., Manila, Cebu, Project Site Address',
+            controller: _locationController,
+          ),
+          const SizedBox(height: 16),
+          CustomDatePicker(
+            label: 'Select Date',
+            selectedDate: _selectedDate,
+            onDateSelected: (date) {
+              setState(() {
+                _selectedDate = date;
+              });
+            },
+          ),
+          const SizedBox(height: 16),
+          CustomTimePicker(
+            label: 'Select Time',
+            selectedTime: _selectedTime,
+            onTimeSelected: (time) {
+              setState(() {
+                _selectedTime = time;
+              });
+            },
+          ),
+          const SizedBox(height: 20),
+          CustomButton(text: 'Add Survey Booking', onPressed: _addBooking),
+          const SizedBox(height: 30),
+          const Text(
+            'All Survey Bookings',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: _bookings.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No survey bookings yet',
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
-            ),
-          ],
-        ),
+                  )
+                : ListView.builder(
+                    itemCount: _bookings.length,
+                    itemBuilder: (context, index) {
+                      final booking = _bookings[index];
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.blue[700],
+                            child: Text(
+                              '${index + 1}',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          title: Text(booking['serviceType']!),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('📍 ${booking['location']!}'),
+                              if (booking['date'] != null &&
+                                  booking['time'] != null)
+                                Text(
+                                  '📅 ${booking['date']} at ${booking['time']}',
+                                ),
+                            ],
+                          ),
+                          trailing: const Icon(Icons.flight),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
       ),
     );
   }

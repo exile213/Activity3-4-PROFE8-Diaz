@@ -49,6 +49,21 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Emil\'s Drone Surveying'),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+        foregroundColor: Colors.white,
+      ),
+      drawer: _buildDrawer(context),
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -86,6 +101,99 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
+
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF77A1D3),
+                  Color(0xFF79CBCA),
+                  Color(0xFFE684AE),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.flight_takeoff, size: 48, color: Colors.white),
+                SizedBox(height: 8),
+                Text(
+                  'Emil\'s Drone Surveying',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Professional Aerial Services',
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline, color: Color(0xFF77A1D3)),
+            title: const Text('Profile'),
+            subtitle: const Text('Login, Register, and Notes'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              // Navigate to Profile tab
+              setState(() {
+                _currentIndex = 3; // Profile tab index
+              });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.settings, color: Color(0xFF79CBCA)),
+            title: const Text('Surveying Services'),
+            subtitle: const Text('Book drone surveys and services'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              // Navigate to Services tab
+              setState(() {
+                _currentIndex = 1; // Services tab index
+              });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.history, color: Color(0xFFE684AE)),
+            title: const Text('Booking History'),
+            subtitle: const Text('View your past and upcoming bookings'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              // Navigate to Bookings tab
+              setState(() {
+                _currentIndex = 2; // Bookings tab index
+              });
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.exit_to_app, color: Colors.red),
+            title: const Text('Exit App'),
+            onTap: () {
+              Navigator.pop(context);
+              // In a real app, you might want to show a confirmation dialog
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Exit functionality would be implemented here'),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 // Placeholder for Services Tab
@@ -94,72 +202,56 @@ class ServicesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Surveying Services'),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          const Icon(Icons.flight, size: 100, color: Colors.blue),
+          const SizedBox(height: 40),
+          const Text(
+            'Drone Surveying Services',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-        ),
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 20),
-            const Icon(Icons.flight, size: 100, color: Colors.blue),
-            const SizedBox(height: 40),
-            const Text(
-              'Drone Surveying Services',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Book your surveying service',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            const SizedBox(height: 40),
-            _buildServiceButton(
-              context,
-              'Surveying Options',
-              'Customize drone model, pilot assistance, and insurance',
-              Icons.settings,
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ServiceOptionsPage(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 16),
-            _buildServiceButton(
-              context,
-              'Book Surveying Service',
-              'Schedule your drone surveying with date and time',
-              Icons.calendar_today,
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const BookingHistoryPage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+          const SizedBox(height: 10),
+          const Text(
+            'Book your surveying service',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+          const SizedBox(height: 40),
+          _buildServiceButton(
+            context,
+            'Surveying Options',
+            'Customize drone model, pilot assistance, and insurance',
+            Icons.settings,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ServiceOptionsPage(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+          _buildServiceButton(
+            context,
+            'Book Surveying Service',
+            'Schedule your drone surveying with date and time',
+            Icons.calendar_today,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookingHistoryPage(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -225,81 +317,65 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF77A1D3), Color(0xFF79CBCA), Color(0xFFE684AE)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          const Icon(Icons.account_circle, size: 100, color: Colors.blue),
+          const SizedBox(height: 20),
+          const Text(
+            'Account Management',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Manage your profile and account settings',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+          const SizedBox(height: 30),
+          const Text(
+            'Authentication',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
             ),
           ),
-        ),
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 20),
-            const Icon(Icons.account_circle, size: 100, color: Colors.blue),
-            const SizedBox(height: 20),
-            const Text(
-              'Account Management',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          const SizedBox(height: 12),
+          _buildProfileButton(context, 'Login', Icons.login, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          }),
+          const SizedBox(height: 16),
+          _buildProfileButton(context, 'Register', Icons.person_add, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RegisterPage()),
+            );
+          }),
+          const SizedBox(height: 24),
+          const Text(
+            'Drone Operations',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Manage your profile and account settings',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'Authentication',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            _buildProfileButton(context, 'Login', Icons.login, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            }),
-            const SizedBox(height: 16),
-            _buildProfileButton(context, 'Register', Icons.person_add, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const RegisterPage()),
-              );
-            }),
-            const SizedBox(height: 24),
-            const Text(
-              'Drone Operations',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 12),
-            _buildProfileButton(context, 'Mission Notes', Icons.notes, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NotesPage()),
-              );
-            }),
-          ],
-        ),
+          ),
+          const SizedBox(height: 12),
+          _buildProfileButton(context, 'Mission Notes', Icons.notes, () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const NotesPage()),
+            );
+          }),
+        ],
       ),
     );
   }
