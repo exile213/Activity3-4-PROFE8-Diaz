@@ -57,7 +57,7 @@ Insurance: ${_includeInsurance ? 'Included' : 'Not included'}
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Service Options'),
+        title: const Text('Surveying Options'),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -78,12 +78,12 @@ Insurance: ${_includeInsurance ? 'Included' : 'Not included'}
             const Icon(Icons.settings, size: 80, color: Colors.blue),
             const SizedBox(height: 20),
             const Text(
-              'Customize Your Service',
+              'Customize Your Surveying Service',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              'Select your preferences for drone service options.',
+              'Select your preferences for drone surveying booking options.',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 40),

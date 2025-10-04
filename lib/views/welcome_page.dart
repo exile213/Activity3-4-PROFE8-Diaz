@@ -58,13 +58,13 @@ class _WelcomePageState extends State<WelcomePage> {
             const Icon(Icons.flight_takeoff, size: 80, color: Colors.blue),
             const SizedBox(height: 20),
             const Text(
-              'Welcome to Drone Services',
+              'Welcome to Drone Surveying Booking',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              'Professional aerial surveys and drone operations for all your needs.',
+              'Book professional drone surveying services for mapping, inspection, and aerial analysis.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),

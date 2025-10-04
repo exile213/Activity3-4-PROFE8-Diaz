@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Drone & Aerial Survey Service',
+      title: 'Drone Surveying Booking Service',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
@@ -74,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
               icon: Icon(Icons.flight),
-              label: 'Services',
+              label: 'Surveying',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
@@ -96,7 +96,7 @@ class ServicesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Services'),
+        title: const Text('Surveying Services'),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -118,20 +118,20 @@ class ServicesTab extends StatelessWidget {
             const Icon(Icons.flight, size: 100, color: Colors.blue),
             const SizedBox(height: 40),
             const Text(
-              'Drone Services',
+              'Drone Surveying Services',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(
-              'Choose your service option',
+              'Book your surveying service',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 40),
             _buildServiceButton(
               context,
-              'Service Options',
+              'Surveying Options',
               'Customize drone model, pilot assistance, and insurance',
               Icons.settings,
               () {
@@ -146,8 +146,8 @@ class ServicesTab extends StatelessWidget {
             const SizedBox(height: 16),
             _buildServiceButton(
               context,
-              'Book Reservation',
-              'Schedule your drone service with date and time',
+              'Book Surveying Service',
+              'Schedule your drone surveying with date and time',
               Icons.calendar_today,
               () {
                 Navigator.push(

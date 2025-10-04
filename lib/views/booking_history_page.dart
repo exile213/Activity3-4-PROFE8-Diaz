@@ -37,6 +37,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
       _bookings.add({
         'serviceType': _serviceTypeController.text,
         'location': _locationController.text,
+        'timestamp': DateTime.now().toString(),
       });
     });
 
@@ -45,7 +46,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Booking added successfully!'),
+        content: Text('Survey booking added successfully!'),
         backgroundColor: Colors.green,
       ),
     );
@@ -55,7 +56,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Booking History'),
+        title: const Text('Drone Surveying Bookings'),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -74,26 +75,27 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Add New Booking',
+              'Add New Survey Booking',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             CustomFormField(
-              label: 'Service Type',
-              hint: 'e.g., Aerial Survey, Photography',
+              label: 'Survey Type',
+              hint:
+                  'e.g., Aerial Survey, Land Mapping, Infrastructure Inspection',
               controller: _serviceTypeController,
             ),
             const SizedBox(height: 16),
             CustomFormField(
               label: 'Location',
-              hint: 'e.g., Manila, Cebu',
+              hint: 'e.g., Manila, Cebu, Project Site Address',
               controller: _locationController,
             ),
             const SizedBox(height: 20),
-            CustomButton(text: 'Add Booking', onPressed: _addBooking),
+            CustomButton(text: 'Add Survey Booking', onPressed: _addBooking),
             const SizedBox(height: 30),
             const Text(
-              'All Bookings',
+              'All Survey Bookings',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -101,7 +103,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
               child: _bookings.isEmpty
                   ? const Center(
                       child: Text(
-                        'No bookings yet',
+                        'No survey bookings yet',
                         style: TextStyle(color: Colors.grey, fontSize: 16),
                       ),
                     )
@@ -120,7 +122,7 @@ class _BookingHistoryPageState extends State<BookingHistoryPage> {
                               ),
                             ),
                             title: Text(booking['serviceType']!),
-                            subtitle: Text(booking['location']!),
+                            subtitle: Text('📍 ${booking['location']!}'),
                             trailing: const Icon(Icons.flight),
                           ),
                         );
