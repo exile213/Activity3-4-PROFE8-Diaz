@@ -8,6 +8,8 @@ import 'views/notes_page.dart';
 import 'views/booking_history_page.dart';
 import 'views/about_page.dart';
 import 'views/contact_page.dart';
+import 'views/push_demo_page.dart';
+import 'views/messages_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _currentIndex == 1
-          ? null
+          ? null // No AppBar for Booking (index 1) tab only
           : AppBar(
               title: const Text('Emil\'s Drone Surveying'),
               centerTitle: true,
@@ -194,7 +196,7 @@ class _MainScreenState extends State<MainScreen> {
           ListTile(
             leading: const Icon(Icons.info_outline, color: Color(0xFF77A1D3)),
             title: const Text('About'),
-            subtitle: const Text('Company information (Named Route)'),
+            subtitle: const Text('Company information'),
             onTap: () {
               Navigator.pop(context); // Close drawer
               Navigator.pushNamed(context, '/about');
@@ -203,10 +205,45 @@ class _MainScreenState extends State<MainScreen> {
           ListTile(
             leading: const Icon(Icons.contact_phone, color: Color(0xFF79CBCA)),
             title: const Text('Contact'),
-            subtitle: const Text('Contact information (Named Route)'),
+            subtitle: const Text('Contact information'),
             onTap: () {
               Navigator.pop(context); // Close drawer
               Navigator.pushNamed(context, '/contact');
+            },
+          ),
+          const Divider(),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Navigation Demo',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF77A1D3),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.compare_arrows, color: Color(0xFF77A1D3)),
+            title: const Text('push vs pushReplacement'),
+            subtitle: const Text('See the difference in navigation'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PushDemoPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.chat, color: Color(0xFF79CBCA)),
+            title: const Text('Chat'),
+            subtitle: const Text('Chats, Status, Calls in Communications'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MessagesPage()),
+              );
             },
           ),
           const Divider(),
@@ -356,7 +393,7 @@ class ProfileTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 20),
-          const Icon(Icons.account_circle, size: 100, color: Colors.blue),
+          const Icon(Icons.account_circle, size: 100, color: Color(0xFF77A1D3)),
           const SizedBox(height: 20),
           const Text(
             'Account Management',
@@ -424,7 +461,7 @@ class ProfileTab extends StatelessWidget {
       icon: Icon(icon),
       label: Text(label),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue[700],
+        backgroundColor: const Color(0xFF77A1D3),
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
