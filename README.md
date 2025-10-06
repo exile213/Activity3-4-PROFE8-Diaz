@@ -84,30 +84,42 @@ The app uses a `BottomNavigationBar` with 4 tabs:
 
 ## Activity 4 - Navigation (Stack, Drawer, Bottom Tabs, TabBar)
 
-### Upcoming Tasks (Not Yet Implemented):
+### Task 1: Create a Flutter app with two screens and navigate between them using Navigator.push() and Navigator.pop().
 
-1. **Create a Flutter app with two screens and navigate between them using Navigator.push() and Navigator.pop().**
+**Implementation:** ServiceOptionsPage buttons use Navigator.push() to navigate to ReservationPage, with automatic back button for Navigator.pop().
 
-2. **Build an app with a Drawer menu that navigates to three different pages.**
+### Task 2: Build an app with a Drawer menu that navigates to three different pages.
 
-3. **Implement a BottomNavigationBar with three tabs (e.g., Home, Profile, Settings).**
+**Implementation:** MainScreen includes a gradient Drawer with navigation items that use setState() to switch between Home, Booking, and Profile tabs.
 
-4. **Create a TabBar with TabBarView that switches between two screens inside a Scaffold.**
+### Task 3: Implement a BottomNavigationBar with three tabs (e.g., Home, Profile, Settings).
 
-5. **Add icons to each item in a BottomNavigationBar.**
+**Implementation:** MainScreen features a 3-tab BottomNavigationBar (Home, Booking, Profile) with gradient styling and proper tab switching logic.
 
-6. **Combine Drawer and BottomNavigationBar in the same app.**
+### Task 4: Create a TabBar with TabBarView that switches between two screens inside a Scaffold.
 
-7. **Implement named routes for three screens: Home, About, and Contact.**
+**Implementation:** BookingHistoryPage contains TabBar with TabBarView showing "New Booking" and "History" tabs using TabController and SingleTickerProviderStateMixin.
 
-8. **Demonstrate the difference between push() and pushReplacement() using two screens.**
+### Task 5: Add icons to each item in a BottomNavigationBar.
 
-9. **Create a TabBar inside an AppBar with three tabs (e.g., Chats, Status, Calls).**
+**Implementation:** BottomNavigationBar items include appropriate icons: home (Home), book_online (Booking), and person (Profile).
 
-10. **Build a navigation flow where a login screen navigates to a home screen, and the home screen contains a Drawer and Bottom Tabs.**
+### Task 6: Combine Drawer and BottomNavigationBar in the same app.
 
-### Notes:
+**Implementation:** MainScreen successfully combines gradient Drawer menu with BottomNavigationBar, both navigating between the same three main tabs.
 
-- These navigation tasks will extend the current drone survey app
-- Implementation will build upon the existing foundation from Activity 3
-- Focus will be on various Flutter navigation patterns and widgets
+### Task 7: Implement named routes for three screens: Home, About, and Contact.
+
+**Implementation:** MaterialApp defines named routes (/home, /about, /contact) with dedicated AboutPage and ContactPage accessed via Drawer navigation.
+
+### Task 8: Demonstrate the difference between push() and pushReplacement() using two screens.
+
+**Implementation:** PushDemoPage and PushReplacementDemoPage show interactive demonstrations of Navigator.push() vs Navigator.pushReplacement() with clear explanations.
+
+### Task 9: Create a TabBar inside an AppBar with three tabs (e.g., Chats, Status, Calls).
+
+**Implementation:** MessagesPage features TabBar embedded in AppBar using bottom property, with Chats, Status, and Calls tabs as requested.
+
+### Task 10: Build a navigation flow where a login screen navigates to a home screen, and the home screen contains a Drawer and Bottom Tabs.
+
+**Implementation:** LoginEntryPage serves as app entry point with email/password form, using Navigator.pushReplacement() to navigate to MainScreen with full Drawer and BottomNavigationBar functionality.
