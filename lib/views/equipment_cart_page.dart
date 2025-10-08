@@ -214,7 +214,7 @@ class EquipmentCartPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Equipment image placeholder
+            // Equipment image using Image.asset() - demonstrates task 6
             Container(
               height: 60,
               width: double.infinity,
@@ -224,10 +224,22 @@ class EquipmentCartPage extends StatelessWidget {
                   top: Radius.circular(8),
                 ),
               ),
-              child: Icon(
-                _getEquipmentIcon(equipment.name),
-                size: 30,
-                color: Colors.blue.shade700,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(8),
+                ),
+                child: Image.asset(
+                  _getEquipmentImagePath(equipment.name),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to icon if image not found
+                    return Icon(
+                      _getEquipmentIcon(equipment.name),
+                      size: 30,
+                      color: Colors.blue.shade700,
+                    );
+                  },
+                ),
               ),
             ),
             Padding(
@@ -292,7 +304,7 @@ class EquipmentCartPage extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         child: Row(
           children: [
-            // Equipment icon
+            // Equipment image using Image.asset() - demonstrates task 6
             Container(
               width: 50,
               height: 50,
@@ -300,9 +312,19 @@ class EquipmentCartPage extends StatelessWidget {
                 color: Colors.blue.shade50,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                _getEquipmentIcon(item.name),
-                color: Colors.blue.shade700,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  _getEquipmentImagePath(item.name),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to icon if image not found
+                    return Icon(
+                      _getEquipmentIcon(item.name),
+                      color: Colors.blue.shade700,
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -398,6 +420,24 @@ class EquipmentCartPage extends StatelessWidget {
         return Icons.cloud;
       default:
         return Icons.build;
+    }
+  }
+
+  // Get equipment image path for Image.asset() - demonstrates task 6
+  String _getEquipmentImagePath(String equipmentName) {
+    switch (equipmentName.toLowerCase()) {
+      case 'extra battery pack':
+        return 'assets/images/battery.jpg';
+      case '4k camera gimbal':
+        return 'assets/images/camera.jpg';
+      case 'thermal imaging camera':
+        return 'assets/images/thermal_camera.jpg';
+      case 'landing pad':
+        return 'assets/images/landing_pad.jpg';
+      case 'weather station':
+        return 'assets/images/weather_station.jpg';
+      default:
+        return 'assets/images/equipment_default.jpg';
     }
   }
 

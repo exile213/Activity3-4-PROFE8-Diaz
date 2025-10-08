@@ -17,6 +17,9 @@ import 'views/push_demo_page.dart';
 import 'views/messages_page.dart';
 import 'views/login_entry_page.dart';
 import 'views/settings_page.dart';
+import 'views/drone_fleet_page.dart';
+import 'views/pilots_page.dart';
+import 'views/training_videos_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -265,6 +268,44 @@ class _MainScreenState extends State<MainScreen> {
             },
           ),
           const Divider(),
+          ListTile(
+            leading: const Icon(Icons.flight, color: Color(0xFF77A1D3)),
+            title: const Text('Drone Fleet'),
+            subtitle: const Text('Browse available drones and equipment'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const DroneFleetPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.people, color: Color(0xFF79CBCA)),
+            title: const Text('Our Pilots'),
+            subtitle: const Text('Meet our certified drone pilots'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PilotsPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.play_circle, color: Color(0xFFE684AE)),
+            title: const Text('Training Videos'),
+            subtitle: const Text('Drone operation and safety training'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TrainingVideosPage(),
+                ),
+              );
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.settings, color: Color(0xFFE684AE)),
             title: const Text('Settings'),

@@ -1,7 +1,26 @@
 # Drone & Aerial Survey Booking App
 
 A Flutter application demonstrating forms and input handling through a professional drone and aerial surv5. **Create a simple to-do list app using Provider for state management.**
-   *Implementation: TodoProvider with flight preparation checklist in notes page, Consumer widgets for UI updates* service business interface.
+_Implementation: TodoProvider with flight preparation checklist in notes page, Consumer widgets for UI updates_
+
+### Media & Assets Tasks
+
+#### Images, Videos, Music, Icons, Fonts
+
+6. **Display a local image using Image.asset().**
+   _Implementation: EquipmentCartPage uses Image.asset() for drone equipment with fallback to icons_
+
+7. **Display an image from the internet using Image.network().**
+   _Implementation: DroneFleetPage and PilotsPage use Image.network() with loading indicators and error handling_
+
+8. **Add a circular border to an image using BoxDecoration.**
+   _Implementation: PilotsPage shows circular profile images using BoxDecoration with shape: BoxShape.circle_
+
+9. **Display a list of images from assets in a GridView.**
+   _Implementation: DroneFleetPage contains GridView.builder displaying both network and local asset images_
+
+10. **Implement a video player using the video_player package.**
+    *Implementation: TrainingVideosPage with VideoPlayerController for drone training videos with custom controls*usiness interface.
 
 ## Description
 
