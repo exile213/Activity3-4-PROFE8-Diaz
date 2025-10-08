@@ -1,6 +1,7 @@
 # Drone & Aerial Survey Booking App
 
-A Flutter application demonstrating forms and input handling through a professional drone and aerial survey service business interface.
+A Flutter application demonstrating forms and input handling through a professional drone and aerial surv5. **Create a simple to-do list app using Provider for state management.**
+   *Implementation: TodoProvider with flight preparation checklist in notes page, Consumer widgets for UI updates* service business interface.
 
 ## Description
 

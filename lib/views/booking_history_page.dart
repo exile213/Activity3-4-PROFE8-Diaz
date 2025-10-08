@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/custom_form_field.dart';
 import '../widgets/custom_date_picker.dart';
 import '../widgets/custom_time_picker.dart';
 import '../widgets/custom_button.dart';
+import '../models/booking_provider.dart';
 
 class BookingHistoryPage extends StatefulWidget {
   const BookingHistoryPage({Key? key}) : super(key: key);
@@ -15,7 +17,6 @@ class _BookingHistoryPageState extends State<BookingHistoryPage>
     with SingleTickerProviderStateMixin {
   final TextEditingController _serviceTypeController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final List<Map<String, String>> _bookings = [];
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
   late TabController _tabController;
@@ -48,16 +49,21 @@ class _BookingHistoryPageState extends State<BookingHistoryPage>
       return;
     }
 
-    setState(() {
-      _bookings.add({
-        'serviceType': _serviceTypeController.text,
-        'location': _locationController.text,
-        'date':
-            '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
-        'time': _selectedTime!.format(context),
-        'timestamp': DateTime.now().toString(),
-      });
-    });
+    // Create new booking using Provider - demonstrates context.read()
+    final newBooking = Booking(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      clientName: 'Current User', // In real app, get from user session
+      serviceType: _serviceTypeController.text,
+      date: _selectedDate!,
+      time: _selectedTime!,
+      location: _locationController.text,
+      notes: 'Survey booking created from booking history page',
+      totalCost: 250.0, // Default cost, can be calculated based on service
+      equipmentIds: [], // Can be enhanced to include equipment from cart
+    );
+
+    // Use context.read() for one-time action - adding booking
+    context.read<BookingProvider>().addBooking(newBooking);
 
     _serviceTypeController.clear();
     _locationController.clear();
@@ -164,14 +170,63 @@ class _BookingHistoryPageState extends State<BookingHistoryPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'All Survey Bookings',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'All Survey Bookings',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              // Statistics using Consumer to watch changes
+              Consumer<BookingProvider>(
+                builder: (context, bookingProvider, child) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade100,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      '${bookingProvider.totalBookings} bookings',
+                      style: TextStyle(
+                        color: Colors.blue.shade700,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
+          const SizedBox(height: 8),
+
+          // Revenue display using Consumer - demonstrates context.watch()
+          Consumer<BookingProvider>(
+            builder: (context, bookingProvider, child) {
+              return Text(
+                'Total Revenue: \$${bookingProvider.totalRevenue.toStringAsFixed(2)}',
+                style: TextStyle(
+                  color: Colors.green.shade700,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              );
+            },
+          ),
+
           const SizedBox(height: 20),
+
           Expanded(
-            child: _bookings.isEmpty
-                ? const Center(
+            // Use Consumer to watch booking changes - demonstrates context.watch()
+            child: Consumer<BookingProvider>(
+              builder: (context, bookingProvider, child) {
+                final bookings = bookingProvider.bookings;
+
+                if (bookings.isEmpty) {
+                  return const Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -188,41 +243,145 @@ class _BookingHistoryPageState extends State<BookingHistoryPage>
                         ),
                       ],
                     ),
-                  )
-                : ListView.builder(
-                    itemCount: _bookings.length,
-                    itemBuilder: (context, index) {
-                      final booking = _bookings[index];
-                      return Card(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.blue[700],
-                            child: Text(
-                              '${index + 1}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
+                  );
+                }
+
+                return ListView.builder(
+                  itemCount: bookings.length,
+                  itemBuilder: (context, index) {
+                    final booking = bookings[index];
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue[700],
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(color: Colors.white),
                           ),
-                          title: Text(booking['serviceType']!),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('📍 ${booking['location']!}'),
-                              if (booking['date'] != null &&
-                                  booking['time'] != null)
-                                Text(
-                                  '📅 ${booking['date']} at ${booking['time']}',
-                                ),
-                            ],
-                          ),
-                          trailing: const Icon(Icons.flight),
                         ),
-                      );
-                    },
-                  ),
+                        title: Text(booking.serviceType),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('👤 ${booking.clientName}'),
+                            Text('📍 ${booking.location}'),
+                            Text(
+                              '📅 ${booking.date.day}/${booking.date.month}/${booking.date.year} at ${booking.time.format(context)}',
+                            ),
+                            Text(
+                              '💰 \$${booking.totalCost.toStringAsFixed(2)}',
+                            ),
+                            if (booking.notes.isNotEmpty)
+                              Text(
+                                '📝 ${booking.notes}',
+                                style: const TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                          ],
+                        ),
+                        trailing: PopupMenuButton<String>(
+                          icon: const Icon(Icons.more_vert),
+                          onSelected: (value) {
+                            if (value == 'delete') {
+                              // Use context.read() for one-time action - deleting booking
+                              context.read<BookingProvider>().removeBooking(
+                                booking.id,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Booking deleted'),
+                                  backgroundColor: Colors.orange,
+                                ),
+                              );
+                            } else if (value == 'edit_notes') {
+                              _showEditNotesDialog(context, booking);
+                            }
+                          },
+                          itemBuilder: (BuildContext context) => [
+                            const PopupMenuItem<String>(
+                              value: 'edit_notes',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit, size: 20),
+                                  SizedBox(width: 8),
+                                  Text('Edit Notes'),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'delete',
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                    color: Colors.red,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Delete',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showEditNotesDialog(BuildContext context, Booking booking) {
+    final notesController = TextEditingController(text: booking.notes);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Booking Notes'),
+          content: TextField(
+            controller: notesController,
+            decoration: const InputDecoration(
+              labelText: 'Notes',
+              border: OutlineInputBorder(),
+            ),
+            maxLines: 3,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Use context.read() for one-time action - updating notes
+                context.read<BookingProvider>().updateBookingNotes(
+                  booking.id,
+                  notesController.text,
+                );
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Notes updated successfully'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              },
+              child: const Text('Save'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
