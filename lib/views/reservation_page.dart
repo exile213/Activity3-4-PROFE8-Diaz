@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_date_picker.dart';
 import '../widgets/custom_time_picker.dart';
 import '../widgets/custom_button.dart';
+import '../services/audio_service.dart';
 
 class ReservationPage extends StatefulWidget {
   const ReservationPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _ReservationPageState extends State<ReservationPage> {
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
 
-  void _handleSubmit() {
+  void _handleSubmit() async {
     if (_selectedDate == null || _selectedTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -23,6 +24,14 @@ class _ReservationPageState extends State<ReservationPage> {
         ),
       );
       return;
+    }
+
+    // Task 12: Play booking success sound effect
+    try {
+      await AudioService().playBookingSuccess();
+    } catch (e) {
+      // Audio is optional - continue even if it fails
+      debugPrint('Audio playback failed: $e');
     }
 
     ScaffoldMessenger.of(context).showSnackBar(

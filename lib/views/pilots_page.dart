@@ -84,12 +84,20 @@ class PilotsPage extends StatelessWidget {
                 children: [
                   const Text(
                     'Professional Drone Pilots',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins', // Task 14: Custom font for title
+                    ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
                     'Meet our certified and experienced pilots',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                      fontFamily: 'Roboto', // Task 14: Custom font for subtitle
+                    ),
                   ),
                   const SizedBox(height: 16),
 
@@ -179,6 +187,7 @@ class PilotsPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins', // Task 14: Custom font
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -188,6 +197,7 @@ class PilotsPage extends StatelessWidget {
                           fontSize: 14,
                           color: Colors.blue.shade700,
                           fontWeight: FontWeight.w600,
+                          fontFamily: 'Roboto', // Task 14: Custom font
                         ),
                       ),
                       const SizedBox(height: 8),

@@ -20,8 +20,14 @@ import 'views/settings_page.dart';
 import 'views/drone_fleet_page.dart';
 import 'views/pilots_page.dart';
 import 'views/training_videos_page.dart';
+import 'services/audio_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize AudioService for task 12
+  await AudioService().initialize();
+
   runApp(const MyApp());
 }
 

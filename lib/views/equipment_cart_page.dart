@@ -232,12 +232,8 @@ class EquipmentCartPage extends StatelessWidget {
                   _getEquipmentImagePath(equipment.name),
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    // Fallback to icon if image not found
-                    return Icon(
-                      _getEquipmentIcon(equipment.name),
-                      size: 30,
-                      color: Colors.blue.shade700,
-                    );
+                    // Task 13: Dynamic Material Icons with enhanced styling
+                    return _buildDynamicEquipmentIcon(equipment.name, context);
                   },
                 ),
               ),
@@ -318,10 +314,14 @@ class EquipmentCartPage extends StatelessWidget {
                   _getEquipmentImagePath(item.name),
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    // Fallback to icon if image not found
-                    return Icon(
-                      _getEquipmentIcon(item.name),
-                      color: Colors.blue.shade700,
+                    // Task 13: Dynamic Material Icons in cart list
+                    return Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        _getEquipmentIcon(item.name),
+                        color: _getEquipmentIconColor(item.name),
+                        size: 24,
+                      ),
                     );
                   },
                 ),
@@ -420,6 +420,72 @@ class EquipmentCartPage extends StatelessWidget {
         return Icons.cloud;
       default:
         return Icons.build;
+    }
+  }
+
+  // Task 13: Dynamic Material Icons with enhanced styling, colors, and animations
+  Widget _buildDynamicEquipmentIcon(
+    String equipmentName,
+    BuildContext context,
+  ) {
+    final iconData = _getEquipmentIcon(equipmentName);
+    final color = _getEquipmentIconColor(equipmentName);
+    final size = _getEquipmentIconSize(equipmentName);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Center(
+        child: TweenAnimationBuilder<double>(
+          duration: const Duration(milliseconds: 600),
+          tween: Tween(begin: 0.5, end: 1.0),
+          builder: (context, scale, child) {
+            return Transform.scale(
+              scale: scale,
+              child: Icon(iconData, size: size, color: color),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  // Dynamic icon colors based on equipment type
+  Color _getEquipmentIconColor(String equipmentName) {
+    switch (equipmentName.toLowerCase()) {
+      case 'extra battery pack':
+        return Colors.green.shade600; // Green for battery/energy
+      case '4k camera gimbal':
+        return Colors.purple.shade600; // Purple for camera/media
+      case 'thermal imaging camera':
+        return Colors.orange.shade600; // Orange for thermal/heat
+      case 'landing pad':
+        return Colors.blue.shade600; // Blue for landing/navigation
+      case 'weather station':
+        return Colors.cyan.shade600; // Cyan for weather/air
+      default:
+        return Colors.grey.shade600; // Grey for general equipment
+    }
+  }
+
+  // Dynamic icon sizes for variety
+  double _getEquipmentIconSize(String equipmentName) {
+    switch (equipmentName.toLowerCase()) {
+      case 'extra battery pack':
+        return 28.0;
+      case '4k camera gimbal':
+        return 32.0; // Larger for emphasis
+      case 'thermal imaging camera':
+        return 30.0;
+      case 'landing pad':
+        return 26.0;
+      case 'weather station':
+        return 34.0; // Largest for weather equipment
+      default:
+        return 28.0;
     }
   }
 

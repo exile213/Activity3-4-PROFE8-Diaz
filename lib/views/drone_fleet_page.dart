@@ -1,7 +1,31 @@
 import 'package:flutter/material.dart';
 
-class DroneFleetPage extends StatelessWidget {
+class DroneFleetPage extends StatefulWidget {
   const DroneFleetPage({super.key});
+
+  @override
+  State<DroneFleetPage> createState() => _DroneFleetPageState();
+}
+
+class _DroneFleetPageState extends State<DroneFleetPage>
+    with TickerProviderStateMixin {
+  late AnimationController _rotationController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Task 13: Rotating drone icon animation
+    _rotationController = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _rotationController.dispose();
+    super.dispose();
+  }
 
   // Sample drone images from network - demonstrates task 7 (Image.network)
   final List<Map<String, String>> networkDroneImages = const [
@@ -261,10 +285,24 @@ class DroneFleetPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.flight,
-                          size: 40,
-                          color: Colors.blue.shade700,
+                        // Task 13: Rotating drone icon with dynamic color
+                        AnimatedBuilder(
+                          animation: _rotationController,
+                          builder: (context, child) {
+                            return Transform.rotate(
+                              angle: _rotationController.value * 2 * 3.14159,
+                              child: Icon(
+                                Icons.flight,
+                                size: 40,
+                                color: HSVColor.fromAHSV(
+                                  1.0,
+                                  (_rotationController.value * 360) % 360,
+                                  0.7,
+                                  0.8,
+                                ).toColor(),
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 8),
                         const Text(
@@ -366,10 +404,22 @@ class DroneFleetPage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.flight_takeoff,
-                          size: 40,
-                          color: Colors.orange.shade700,
+                        // Task 13: Pulsing takeoff icon with size animation
+                        AnimatedBuilder(
+                          animation: _rotationController,
+                          builder: (context, child) {
+                            final pulseScale =
+                                1.0 +
+                                (0.3 * (1 + _rotationController.value) / 2);
+                            return Transform.scale(
+                              scale: pulseScale,
+                              child: Icon(
+                                Icons.flight_takeoff,
+                                size: 40,
+                                color: Colors.orange.shade700,
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(height: 8),
                         const Text(
