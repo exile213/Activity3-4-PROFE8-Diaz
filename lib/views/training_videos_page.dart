@@ -22,7 +22,7 @@ class _TrainingVideosPageState extends State<TrainingVideosPage> {
       'duration': '3:45',
       'url':
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      'asset': 'assets/videos/preflight_inspection.mp4',
+      'asset': 'assets/videos/video1.mp4',
       'thumbnail':
           'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop',
     },
@@ -32,7 +32,7 @@ class _TrainingVideosPageState extends State<TrainingVideosPage> {
       'duration': '4:12',
       'url':
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-      'asset': 'assets/videos/takeoff_procedures.mp4',
+      'asset': 'assets/videos/video1.mp4',
       'thumbnail':
           'https://images.unsplash.com/photo-1589149071751-ccdc2a5537cd?w=300&h=200&fit=crop',
     },
@@ -42,7 +42,7 @@ class _TrainingVideosPageState extends State<TrainingVideosPage> {
       'duration': '5:30',
       'url':
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      'asset': 'assets/videos/emergency_landing.mp4',
+      'asset': 'assets/videos/video1.mp4',
       'thumbnail':
           'https://images.unsplash.com/photo-1629654637738-c8b8d100df85?w=300&h=200&fit=crop',
     },
@@ -53,7 +53,7 @@ class _TrainingVideosPageState extends State<TrainingVideosPage> {
       'duration': '6:15',
       'url':
           'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-      'asset': 'assets/videos/weather_assessment.mp4',
+      'asset': 'assets/videos/video1.mp4',
       'thumbnail':
           'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop',
     },

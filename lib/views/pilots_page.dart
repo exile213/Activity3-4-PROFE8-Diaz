@@ -26,7 +26,7 @@ class PilotsPage extends StatelessWidget {
       'missions': 189,
       'imageUrl':
           'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
-      'localImage': 'assets/images/pilot2.jpg',
+      'localImage': 'assets/images/pilot1.jpg',
       'status': 'On Mission',
     },
     {
@@ -38,7 +38,7 @@ class PilotsPage extends StatelessWidget {
       'missions': 156,
       'imageUrl':
           'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
-      'localImage': 'assets/images/pilot3.jpg',
+      'localImage': 'assets/images/pilot1.jpg',
       'status': 'Available',
     },
     {
@@ -50,7 +50,7 @@ class PilotsPage extends StatelessWidget {
       'missions': 98,
       'imageUrl':
           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
-      'localImage': 'assets/images/pilot4.jpg',
+      'localImage': 'assets/images/pilot1.jpg',
       'status': 'Available',
     },
   ];

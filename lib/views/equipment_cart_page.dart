@@ -425,20 +425,8 @@ class EquipmentCartPage extends StatelessWidget {
 
   // Get equipment image path for Image.asset() - demonstrates task 6
   String _getEquipmentImagePath(String equipmentName) {
-    switch (equipmentName.toLowerCase()) {
-      case 'extra battery pack':
-        return 'assets/images/battery.jpg';
-      case '4k camera gimbal':
-        return 'assets/images/camera.jpg';
-      case 'thermal imaging camera':
-        return 'assets/images/thermal_camera.jpg';
-      case 'landing pad':
-        return 'assets/images/landing_pad.jpg';
-      case 'weather station':
-        return 'assets/images/weather_station.jpg';
-      default:
-        return 'assets/images/equipment_default.jpg';
-    }
+    // Using the same drone1.jpg for all equipment items for simplicity
+    return 'assets/images/drone1.jpg';
   }
 
   void _showCheckoutDialog(BuildContext context) {

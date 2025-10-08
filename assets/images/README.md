@@ -1,48 +1,30 @@
-# Images Assets Needed
+# Images Assets - MINIMAL REQUIREMENTS
 
-## For Activity 5 Implementation:
+## For Activity 5 Implementation (REDUCED):
 
-### Drone Equipment Images (for task 6 - Image.asset()):
+### Essential Images (only 3 total needed):
 
-- `drone_mavic.jpg` - DJI Mavic drone
-- `drone_phantom.jpg` - DJI Phantom drone
-- `battery.jpg` - Drone battery pack
-- `camera.jpg` - 4K camera gimbal
-- `thermal_camera.jpg` - Thermal imaging camera
-- `landing_pad.jpg` - Drone landing pad
-- `weather_station.jpg` - Weather monitoring device
+- `drone1.jpg` - Any drone image (used for equipment, fleet, and demos)
+- `pilot1.jpg` - Any person photo (for pilot profiles)
+- `project1.jpg` - Any landscape/building photo (for project demos)
 
-### Drone Fleet Images (for task 9 - GridView gallery):
+**That's it! Just 3 images total.**
 
-- `fleet_drone1.jpg` - Professional survey drone
-- `fleet_drone2.jpg` - Mapping drone
-- `fleet_drone3.jpg` - Inspection drone
-- `fleet_drone4.jpg` - Emergency response drone
-- `fleet_drone5.jpg` - Agricultural drone
-- `fleet_drone6.jpg` - Security patrol drone
+## How it works:
 
-### Profile Images (for task 8 - circular borders):
-
-- `pilot1.jpg` - Professional drone pilot
-- `pilot2.jpg` - Survey specialist
-- `pilot3.jpg` - Emergency response pilot
-
-### Project Images (for task 18 - carousel):
-
-- `project1.jpg` - Completed survey project
-- `project2.jpg` - Construction site mapping
-- `project3.jpg` - Agricultural monitoring
-- `project4.jpg` - Infrastructure inspection
+- The same `drone1.jpg` will be reused everywhere (equipment page, fleet page, etc.)
+- The same `pilot1.jpg` will be reused for all pilot profiles
+- The same `project1.jpg` will be reused for all project demonstrations
+- App includes fallback placeholders if images are missing
 
 ## Current Status:
 
-- Folders created but images not yet added
-- Implementation will use placeholder icons initially
-- Real images can be added later for full functionality
+- All code is implemented with proper error handling
+- Works without any images (shows placeholder icons)
+- Add the 3 images above for the complete experience
 
 ## Image Requirements:
 
 - Format: JPG/PNG
-- Size: 400x300px recommended for consistency
-- Professional drone/survey related content
-- High quality for demonstration purposes
+- Any size (app will resize automatically)
+- Any content (doesn't have to be drone-related)

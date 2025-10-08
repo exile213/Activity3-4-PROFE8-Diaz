@@ -1,33 +1,30 @@
-# Video Assets Needed
+# Video Assets - MINIMAL REQUIREMENTS
 
-## For Activity 5 Implementation:
+## For Tasks 10-11 (Video Player) - OPTIONAL:
 
-### Drone Operation Videos (for task 10 - video_player):
+### Only 1 file needed (optional):
 
-- `drone_takeoff.mp4` - Drone takeoff demonstration
-- `survey_flight.mp4` - Aerial survey in progress
-- `landing_procedure.mp4` - Safe landing demonstration
+- `video1.mp4` - Any MP4 video file
 
-### Enhanced Video Content (for task 11 - chewie player):
+**That's it! Just 1 video file, and it's optional.**
 
-- `training_video.mp4` - Pilot training content
-- `safety_briefing.mp4` - Safety procedures video
+## How it works:
 
-### Combined Media (for task 19 - video + audio player):
-
-- `complete_mission.mp4` - Full drone mission with audio
-- `tutorial.mp4` - Tutorial with narration
+- App already uses online sample videos (BigBuckBunny, etc.)
+- Works perfectly without any local video files
+- Local videos are just an alternative source
+- You can use any MP4 file and rename it to `video1.mp4`
 
 ## Current Status:
 
-- Folders created but videos not yet added
-- Implementation will use placeholder or sample videos initially
-- Real drone footage can be added later
+- Video player implemented with online fallbacks
+- No local video files required for app to function
+- Online videos work out of the box
 
 ## Video Requirements:
 
-- Format: MP4 (H.264 codec recommended)
-- Duration: 30-60 seconds for demo purposes
+- Format: MP4
+- Any length or content
 - Resolution: 720p or 1080p
 - Professional drone operation content
 - Clear audio for demonstration purposes

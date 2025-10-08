@@ -54,25 +54,25 @@ class DroneFleetPage extends StatelessWidget {
     {
       'title': 'Phantom Pro',
       'description': 'Professional aerial photography',
-      'asset': 'assets/images/fleet_drone1.jpg',
+      'asset': 'assets/images/drone1.jpg',
       'price': '\$1,800/day',
     },
     {
       'title': 'Mavic Enterprise',
       'description': 'Compact professional drone',
-      'asset': 'assets/images/fleet_drone2.jpg',
+      'asset': 'assets/images/drone1.jpg',
       'price': '\$2,100/day',
     },
     {
       'title': 'Inspire Mapping',
       'description': 'Heavy-duty mapping drone',
-      'asset': 'assets/images/fleet_drone3.jpg',
+      'asset': 'assets/images/drone1.jpg',
       'price': '\$3,800/day',
     },
     {
       'title': 'Mini Survey',
       'description': 'Lightweight survey drone',
-      'asset': 'assets/images/fleet_drone4.jpg',
+      'asset': 'assets/images/drone1.jpg',
       'price': '\$1,500/day',
     },
   ];

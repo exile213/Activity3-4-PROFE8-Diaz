@@ -1,19 +1,36 @@
-# Assets Directory
+# Assets Overview - MINIMAL REQUIREMENTS
 
-This directory contains all media assets for the Drone Survey Booking App.
+## TOTAL ASSETS NEEDED: 7 files (ALL OPTIONAL!)
 
-## Structure:
+### Images (3 files - optional):
 
-- **images/**: Drone photos, pilot profiles, project showcase images
-- **videos/**: Drone operation demonstrations, promotional videos
-- **audio/**: Notification sounds, confirmation tones
-- **fonts/**: Custom fonts (Roboto, Poppins)
+- `images/drone1.jpg` - Any image (reused everywhere)
+- `images/pilot1.jpg` - Any person photo
+- `images/project1.jpg` - Any landscape/building photo
 
-## For Activity 5 Implementation:
+### Audio (1 file - optional):
 
-The app will use these assets to demonstrate:
+- `audio/booking_success.mp3` - Any short sound file
 
-- Local vs network images
-- Video player functionality
-- Audio feedback systems
-- Custom typography and icons
+### Videos (1 file - optional):
+
+- `videos/video1.mp4` - Any MP4 video file
+
+### Fonts (2 files - optional):
+
+- `fonts/Roboto-Regular.ttf` - Any TTF font
+- `fonts/Poppins-Regular.ttf` - Any other TTF font
+
+## IMPORTANT:
+
+- **App works perfectly without ANY files!**
+- All features have fallbacks and error handling
+- Assets are just visual/audio enhancements
+- You can add files gradually or not at all
+
+## Quick Start:
+
+1. App runs immediately without any assets
+2. Add files one by one to enhance experience
+3. Use any images/sounds/videos you have
+4. Rename them to match the filenames above
