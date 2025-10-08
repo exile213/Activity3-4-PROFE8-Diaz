@@ -123,3 +123,43 @@ The app uses a `BottomNavigationBar` with 4 tabs:
 ### Task 10: Build a navigation flow where a login screen navigates to a home screen, and the home screen contains a Drawer and Bottom Tabs.
 
 **Implementation:** LoginEntryPage serves as app entry point with email/password form, using Navigator.pushReplacement() to navigate to MainScreen with full Drawer and BottomNavigationBar functionality.
+
+---
+
+## Activity 5 - State Management (setState, useState, Provider, Redux) and Media & Assets
+
+### State Management Tasks
+
+1. **Create a shopping cart app or any that can add items using Provider.**
+   _Implementation: EquipmentCartPage with drone accessories cart using CartProvider with add/remove functionality_
+
+2. **Use ChangeNotifier with Provider to update the UI when data changes.**
+   _Implementation: CartProvider extends ChangeNotifier, automatically updates cart UI when items added/removed_
+
+3. **Demonstrate the difference between context.read() and context.watch() in Provider.**
+   _Implementation: Cart uses context.read() for actions (add/remove) and Consumer/context.watch() for UI updates_
+
+4. **Implement a theme switcher (dark/light mode) using Provider.**
+   _Implementation: ThemeProvider with SettingsPage toggle, Consumer watches theme changes across entire app_
+
+5. **Create a simple to-do list app using Provider for state management.**
+   _Implementation: TodoProvider for flight preparation checklist in notes page (in progress)_
+
+### Media & Assets Tasks
+
+#### Images, Videos, Music, Icons, Fonts
+
+6. **Display a local image using Image.asset().**
+7. **Display an image from the internet using Image.network().**
+8. **Add a circular border to an image using BoxDecoration.**
+9. **Display a list of images from assets in a GridView.**
+10. **Implement a video player using the video_player package.**
+11. **Enhance the video player with controls using the chewie package.**
+12. **Play a short audio clip using the audioplayers package.**
+13. **Display Material Icons and change their color and size dynamically.**
+14. **Add a custom icon set using the flutter_icons package.**
+15. **Add a custom font (e.g., Roboto, Poppins) via pubspec.yaml.**
+16. **Display two different text styles using two custom fonts.**
+17. **Create a profile card with an image, custom icon, and styled text.**
+18. **Build a gallery app / carousel that loads images from assets.**
+19. **Build a video + audio player app with play, pause, and stop buttons.**

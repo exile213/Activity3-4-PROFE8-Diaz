@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'models/cart_provider.dart';
+import 'models/theme_provider.dart';
+import 'models/booking_provider.dart';
+import 'models/todo_provider.dart';
 import 'views/welcome_page.dart';
 import 'views/login_page.dart';
 import 'views/register_page.dart';
@@ -11,6 +16,7 @@ import 'views/contact_page.dart';
 import 'views/push_demo_page.dart';
 import 'views/messages_page.dart';
 import 'views/login_entry_page.dart';
+import 'views/settings_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,21 +27,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Drone Surveying Booking Service',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (context) => BookingProvider()),
+        ChangeNotifierProvider(create: (context) => TodoProvider()),
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Drone Surveying Booking Service',
+            debugShowCheckedModeBanner: false,
+            theme: themeProvider.currentTheme,
+            // Named routes configuration - Task 10: Complete navigation flow
+            initialRoute: '/',
+            routes: {
+              '/': (context) =>
+                  const LoginEntryPage(), // Start with login screen
+              '/home': (context) =>
+                  const MainScreen(), // Main dashboard after login
+              '/about': (context) => const AboutPage(),
+              '/contact': (context) => const ContactPage(),
+            },
+          );
+        },
       ),
-      // Named routes configuration - Task 10: Complete navigation flow
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const LoginEntryPage(), // Start with login screen
-        '/home': (context) => const MainScreen(), // Main dashboard after login
-        '/about': (context) => const AboutPage(),
-        '/contact': (context) => const ContactPage(),
-      },
     );
   }
 }
@@ -248,6 +265,18 @@ class _MainScreenState extends State<MainScreen> {
             },
           ),
           const Divider(),
+          ListTile(
+            leading: const Icon(Icons.settings, color: Color(0xFFE684AE)),
+            title: const Text('Settings'),
+            subtitle: const Text('App settings and theme preferences'),
+            onTap: () {
+              Navigator.pop(context); // Close drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.exit_to_app, color: Colors.red),
             title: const Text('Exit App'),

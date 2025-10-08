@@ -5,6 +5,7 @@ import '../widgets/custom_form_field.dart';
 import '../widgets/custom_checkbox.dart';
 import '../widgets/custom_switch.dart';
 import '../widgets/custom_button.dart';
+import 'equipment_cart_page.dart';
 
 class ServiceOptionsPage extends StatefulWidget {
   const ServiceOptionsPage({Key? key}) : super(key: key);
@@ -175,6 +176,33 @@ Insurance: ${_includeInsurance ? 'Included' : 'Not included'}
               text: 'Save Options',
               onPressed: _handleSubmit,
               icon: Icons.save,
+            ),
+
+            const SizedBox(height: 16),
+
+            // Equipment Rental Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EquipmentCartPage(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.shopping_cart),
+                label: const Text('Rent Additional Equipment'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade600,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
