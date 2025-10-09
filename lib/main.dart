@@ -21,6 +21,7 @@ import 'views/drone_fleet_page.dart';
 import 'views/pilots_page.dart';
 import 'views/training_videos_page.dart';
 import 'services/audio_service.dart';
+import 'routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,16 +50,18 @@ class MyApp extends StatelessWidget {
             title: 'Drone Surveying Booking Service',
             debugShowCheckedModeBanner: false,
             theme: themeProvider.currentTheme,
-            // Named routes configuration - Task 10: Complete navigation flow
-            initialRoute: '/',
-            routes: {
-              '/': (context) =>
-                  const LoginEntryPage(), // Start with login screen
-              '/home': (context) =>
-                  const MainScreen(), // Main dashboard after login
-              '/about': (context) => const AboutPage(),
-              '/contact': (context) => const ContactPage(),
-            },
+            // Task 16: Advanced navigation with route generation
+            initialRoute: AppRoutes.loginEntry,
+            onGenerateRoute: AppRoutes.generateRoute,
+            // Fallback for undefined routes
+            onUnknownRoute: (settings) => MaterialPageRoute(
+              builder: (_) => Scaffold(
+                appBar: AppBar(title: const Text('Page Not Found')),
+                body: const Center(
+                  child: Text('The requested page was not found.'),
+                ),
+              ),
+            ),
           );
         },
       ),

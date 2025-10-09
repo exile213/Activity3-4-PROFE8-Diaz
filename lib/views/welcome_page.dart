@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_form_field.dart';
 import '../widgets/custom_button.dart';
 import 'service_options_page.dart';
+import 'gallery_carousel_page.dart';
+import 'combined_media_player_page.dart';
 
 class WelcomePage extends StatefulWidget {
   final Function(int)? onNavigateToTab;
@@ -47,15 +49,74 @@ class _WelcomePageState extends State<WelcomePage> {
           const Text(
             'Welcome to Drone Surveying Booking',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins', // Task 16: Poppins font for titles
+            ),
           ),
           const SizedBox(height: 10),
           const Text(
             'Book professional drone surveying services for mapping, inspection, and aerial analysis.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+              fontFamily: 'Roboto', // Task 16: Roboto font for descriptions
+            ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
+
+          // Task 16: Font styles demonstration
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.blue.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.blue.shade200),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Font Showcase - Task 16',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                    color: Color(0xFF1976D2),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Poppins Font Family:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+                const Text(
+                  'This text uses Poppins font - modern, clean, and perfect for headings and titles.',
+                  style: TextStyle(fontSize: 14, fontFamily: 'Poppins'),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Roboto Font Family:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Roboto',
+                  ),
+                ),
+                const Text(
+                  'This text uses Roboto font - professional, readable, and excellent for body text and descriptions.',
+                  style: TextStyle(fontSize: 14, fontFamily: 'Roboto'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
           CustomFormField(
             label: 'Username',
             hint: 'Enter your username',
@@ -85,6 +146,34 @@ class _WelcomePageState extends State<WelcomePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const ServiceOptionsPage(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          _buildServiceButton(
+            'Gallery Carousel',
+            'View image gallery with smooth transitions',
+            Icons.photo_library,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const GalleryCarouselPage(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          _buildServiceButton(
+            'Media Player',
+            'Combined video and audio player with controls',
+            Icons.play_circle_filled,
+            () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CombinedMediaPlayerPage(),
                 ),
               );
             },

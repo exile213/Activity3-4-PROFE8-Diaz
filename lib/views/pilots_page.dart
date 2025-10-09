@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/profile_card.dart';
 
 class PilotsPage extends StatelessWidget {
   const PilotsPage({super.key});
@@ -130,6 +131,213 @@ class PilotsPage extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Task 15: Font styles showcase section
+            Container(
+              margin: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Font showcase title
+                  const Text(
+                    'Typography Showcase',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                      color: Color(0xFF1976D2),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Poppins font family demonstration
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Poppins Font Family',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF1976D2),
+                          fontFamily: 'Roboto',
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Large Title',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Medium Heading',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Regular Text',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Small Caption',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Roboto font family demonstration
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Roboto Font Family',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF1976D2),
+                          fontFamily: 'Roboto',
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Professional Header',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Roboto',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Subheading Style',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Roboto',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Body Text Content',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Roboto',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Caption Text',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Roboto',
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Font style variations
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Style Variations',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF1976D2),
+                          fontFamily: 'Roboto',
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Bold & Poppins',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Italic Roboto',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: 'Roboto',
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Light Poppins',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Poppins',
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Heavy Roboto',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Roboto',
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -142,7 +350,21 @@ class PilotsPage extends StatelessWidget {
       itemCount: pilots.length,
       itemBuilder: (context, index) {
         final pilot = pilots[index];
-        return _buildPilotCard(pilot, useNetwork: true);
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: ProfileCard(
+            name: pilot['name'],
+            title: pilot['title'],
+            imageUrl: pilot['imageUrl'],
+            localImagePath: pilot['localImage'],
+            customIcon: _getIconForSpecialization(pilot['specialization']),
+            description:
+                '${pilot['experience']} • ${pilot['specialization']} • ${pilot['missions']} missions',
+            status: pilot['status'],
+            rating: pilot['rating'].toDouble(),
+            useNetworkImage: true,
+          ),
+        );
       },
     );
   }
@@ -153,258 +375,58 @@ class PilotsPage extends StatelessWidget {
       itemCount: pilots.length,
       itemBuilder: (context, index) {
         final pilot = pilots[index];
-        return _buildPilotCard(pilot, useNetwork: false);
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: ProfileCard(
+            name: pilot['name'],
+            title: pilot['title'],
+            imageUrl: pilot['imageUrl'],
+            localImagePath: pilot['localImage'],
+            customIcon: _getIconForSpecialization(pilot['specialization']),
+            description:
+                '${pilot['experience']} • ${pilot['specialization']} • ${pilot['missions']} missions',
+            status: pilot['status'],
+            rating: pilot['rating'].toDouble(),
+            useNetworkImage: false,
+          ),
+        );
       },
     );
   }
 
-  Widget _buildPilotCard(
-    Map<String, dynamic> pilot, {
-    required bool useNetwork,
-  }) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                // Circular profile image - demonstrates task 8 (BoxDecoration circular borders)
-                _buildCircularProfileImage(pilot, useNetwork),
-
-                const SizedBox(width: 16),
-
-                // Pilot details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        pilot['name'],
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins', // Task 14: Custom font
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        pilot['title'],
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.blue.shade700,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Roboto', // Task 14: Custom font
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            size: 16,
-                            color: Colors.amber.shade600,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${pilot['rating']}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Icon(
-                            Icons.flight,
-                            size: 16,
-                            color: Colors.blue.shade600,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${pilot['missions']} missions',
-                            style: const TextStyle(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Status indicator with circular design
-                _buildStatusIndicator(pilot['status']),
-              ],
-            ),
-
-            const SizedBox(height: 16),
-
-            // Additional pilot information
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _buildInfoItem(
-                          Icons.schedule,
-                          'Experience',
-                          pilot['experience'],
-                        ),
-                      ),
-                      Container(
-                        width: 1,
-                        height: 40,
-                        color: Colors.grey.shade300,
-                      ),
-                      Expanded(
-                        child: _buildInfoItem(
-                          useNetwork ? Icons.cloud : Icons.folder,
-                          'Image Source',
-                          useNetwork ? 'Network' : 'Local Asset',
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Specialization: ${pilot['specialization']}',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontStyle: FontStyle.italic,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  // Helper method to get appropriate icon for specialization
+  IconData _getIconForSpecialization(String specialization) {
+    if (specialization.contains('mapping') ||
+        specialization.contains('surveying')) {
+      return Icons.map_outlined;
+    } else if (specialization.contains('rescue') ||
+        specialization.contains('emergency')) {
+      return Icons.medical_services_outlined;
+    } else if (specialization.contains('landscape') ||
+        specialization.contains('nature')) {
+      return Icons.landscape_outlined;
+    } else if (specialization.contains('construction') ||
+        specialization.contains('infrastructure')) {
+      return Icons.construction_outlined;
+    } else {
+      return Icons.flight_outlined;
+    }
   }
+}
 
-  // Demonstrates task 8: Circular borders using BoxDecoration
-  Widget _buildCircularProfileImage(
-    Map<String, dynamic> pilot,
-    bool useNetwork,
-  ) {
-    return Container(
-      width: 80,
-      height: 80,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.blue.shade300, width: 3),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: ClipOval(
-        child: useNetwork
-            ? Image.network(
-                pilot['imageUrl'],
-                width: 74,
-                height: 74,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
-                    color: Colors.blue.shade50,
-                    child: const Center(child: CircularProgressIndicator()),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.blue.shade50,
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: Colors.blue.shade700,
-                    ),
-                  );
-                },
-              )
-            : Image.asset(
-                pilot['localImage'],
-                width: 74,
-                height: 74,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.orange.shade50,
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: Colors.orange.shade700,
-                    ),
-                  );
-                },
-              ),
-      ),
-    );
-  }
+// Task 15: Helper class for font style demonstrations
+class FontStyleDemo {
+  final String text;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final String fontFamily;
+  final bool italic;
 
-  Widget _buildStatusIndicator(String status) {
-    Color statusColor = status == 'Available' ? Colors.green : Colors.orange;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: statusColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20), // Circular borders for status
-        border: Border.all(color: statusColor.withOpacity(0.3), width: 1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle, // Circular status indicator
-              color: statusColor,
-            ),
-          ),
-          const SizedBox(width: 6),
-          Text(
-            status,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: statusColor,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoItem(IconData icon, String label, String value) {
-    return Column(
-      children: [
-        Icon(icon, size: 20, color: Colors.blue.shade600),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          value,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-        ),
-      ],
-    );
-  }
+  const FontStyleDemo(
+    this.text,
+    this.fontSize,
+    this.fontWeight,
+    this.fontFamily, {
+    this.italic = false,
+  });
 }

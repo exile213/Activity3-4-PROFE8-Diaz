@@ -170,16 +170,43 @@ The app uses a `BottomNavigationBar` with 4 tabs:
 #### Images, Videos, Music, Icons, Fonts
 
 6. **Display a local image using Image.asset().**
+   _Implementation: EquipmentCartPage uses Image.asset() for drone equipment with fallback to icons_
+
 7. **Display an image from the internet using Image.network().**
+   _Implementation: DroneFleetPage and PilotsPage use Image.network() with loading indicators and error handling_
+
 8. **Add a circular border to an image using BoxDecoration.**
+   _Implementation: PilotsPage shows circular profile images using BoxDecoration with shape: BoxShape.circle_
+
 9. **Display a list of images from assets in a GridView.**
+   _Implementation: DroneFleetPage contains GridView.builder displaying both network and local asset images_
+
 10. **Implement a video player using the video_player package.**
+    _Implementation: TrainingVideosPage with VideoPlayerController for drone training videos with custom controls_
+
 11. **Enhance the video player with controls using the chewie package.**
+    _Implementation: Integrated Chewie controller in TrainingVideosPage and CombinedMediaPlayerPage for enhanced video controls with custom progress colors_
+
 12. **Play a short audio clip using the audioplayers package.**
+    _Implementation: AudioService provider plays booking-success.mp3 with play/pause/stop functionality in equipment cart and combined media player_
+
 13. **Display Material Icons and change their color and size dynamically.**
+    _Implementation: Dynamic icons throughout app with animated scaling, color changes based on status, and size variations in buttons and indicators_
+
 14. **Add a custom icon set using the flutter_icons package.**
+    _Implementation: Custom specialized icons for pilot profiles and equipment categories with dynamic selection based on specialization type_
+
 15. **Add a custom font (e.g., Roboto, Poppins) via pubspec.yaml.**
+    _Implementation: Added Roboto-Regular.ttf and Poppins-Regular.ttf to assets/fonts/ with proper pubspec.yaml configuration_
+
 16. **Display two different text styles using two custom fonts.**
+    _Implementation: WelcomePage font showcase section demonstrates Poppins and Roboto fonts with multiple weight and style variations_
+
 17. **Create a profile card with an image, custom icon, and styled text.**
+    _Implementation: ProfileCard widget in pilots page with circular images, custom icons, gradient backgrounds, and styled text using custom fonts_
+
 18. **Build a gallery app / carousel that loads images from assets.**
+    _Implementation: GalleryCarouselPage with PageView, animated indicators, and smooth transitions between drone/pilot/project images_
+
 19. **Build a video + audio player app with play, pause, and stop buttons.**
+    _Implementation: CombinedMediaPlayerPage with separate video/audio players, individual controls, progress sliders, and combined stop-all functionality_
